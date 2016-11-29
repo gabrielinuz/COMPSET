@@ -8,14 +8,13 @@
 
 require_once 'components/ActionLoader/interface/ActionInterface.php';
 
-class TestDatabaseAction implements ActionInterface
+class TestDatabase implements ActionInterface
 {
     public function execute()
     {
         $dbh = ComponentFactory::create('DatabaseHandler');
-        $sql = 'select users.username from users where users.id = ?';
-        $param = $_REQUEST['identifier'];
-        echo json_encode( $dbh->exec($sql, $param) );
+        $sql = 'select users.username from users';
+        echo json_encode( $dbh->exec($sql) );
     }
 }
 ?>
