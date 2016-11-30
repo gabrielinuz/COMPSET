@@ -7,10 +7,7 @@
 
 define(function (require) 
 {
-    // Load any app-specific modules
-    // with a relative require call,
-    // like:
-    var test = require('modules/test/TestDatabase');
+    var test = require('modules/test/TestDatabaseController');
     test.run();
 
     /*@ToDo*/
