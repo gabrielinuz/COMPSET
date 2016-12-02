@@ -10,6 +10,7 @@ define(function ()
     return function render(response)
     {
         var table = document.createElement('table');
+        table.border = 1;
         var th = document.createElement('th');
         for( i = 0; i < response.length; i++)
         {
