@@ -13,7 +13,6 @@ define(['libraries/RequestWrapper/RequestWrapper', 'modules/test/TestDatabaseVie
             var request = new RequestWrapper();
             request.path = 'backend/main.php';
             request.callback = TestDatabaseView;
-            request.responseType = 'json';
             request.appendParameter('action', 'test/TestDatabase');
             request.send();
         }
