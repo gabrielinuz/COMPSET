@@ -17,6 +17,8 @@ class DatabaseHandler implements DatabaseHandlerInterface
         $this->statement = null;
         $this->returnsData = false;
         $this->data = null;
+        if (!defined('CT_DATABASE_CHARSET')) define('CT_DATABASE_CHARSET', 'utf8');
+        
         $this->connect();
     }
 
