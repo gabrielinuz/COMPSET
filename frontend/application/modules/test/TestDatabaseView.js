@@ -10,7 +10,7 @@ define(function ()
     return function render(response)
     {
         var table = document.createElement('table');
-        table.border = 1;
+        table.className = 'table table-bordered table-hover';
         var th = document.createElement('th');
         for( i = 0; i < response.length; i++)
         {
@@ -24,5 +24,20 @@ define(function ()
 
         document.getElementById('container').innerHTML = '';//clear
         document.getElementById('container').appendChild(table);
+
+        var button = document.createElement('button');
+        button.id = 'testButton';
+        button.className = 'btn btn-primary';
+        var buttonName = document.createTextNode('testButton');
+        button.appendChild(buttonName);
+        document.getElementById('container').appendChild(button);
+
+        button.addEventListener('click', function()
+        {        
+            require(['modules/test/TestActionController'], function(TestActionController) 
+            {
+                TestActionController.run();
+            });
+        });
     };
 });

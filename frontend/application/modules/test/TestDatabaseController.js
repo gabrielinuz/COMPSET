@@ -5,16 +5,15 @@
 * https://opensource.org/licenses/MIT
 **/
 
-define(['libraries/RequestWrapper/RequestWrapper', 'modules/test/TestDatabaseView'], 
-    function (RequestWrapper, TestDatabaseView) 
+define(['libraries/Request/Request', 'modules/test/TestDatabaseView'], 
+    function (Request, TestDatabaseView) 
     {
         function run() 
         {
-            var request = new RequestWrapper();
-            request.path = 'backend/main.php';
-            request.callback = TestDatabaseView;
-            request.appendParameter('action', 'test/TestDatabase');
-            request.send();
+            Request.path = 'backend/main.php';
+            Request.callback = TestDatabaseView;
+            Request.appendParameter('action', 'test/TestDatabase');
+            Request.send();
         }
 
         return { run:run };

@@ -1,0 +1,30 @@
+<noscript>
+  <p>Welcome!</p>
+  <p>
+    The page you are seeing requires the use of JavaScript performance.
+    If you have intentionally disabled, please re-activate.
+  </p>
+</noscript>
+
+<div id="LoginFormContainer" class="container text-center">
+    <img class="form-signin-heading text-center" src="frontend/images/system_logo.png" alt="Logo">
+
+    <form role ="login" id="login-form" class="form-signin text-center" method="post" action="index.php?presenter=Auths&method=authenticate">
+        
+        <h2 class="form-signin-heading">Bienvenida</h2><div class="form-group"> 
+            <input id="public_key" type="hidden" name="public_key" value="df263d996281d984952c07998dc54358?>">
+        </div>
+
+        <div class="form-group">   
+            <input id="nickname" name="nickname" type="text" class="form-control" placeholder="Nombre: " required autofocus>
+        </div>
+
+        <div class="form-group"> 
+            <input id="password" name="password" type="password" class="form-control" placeholder="Contrase&ntilde;a: " required>
+        </div>
+
+        <div class="form-group">               
+            <input id="login-submit" type="submit" class="btn btn-lg btn-primary btn-block" value="Iniciar sesi&oacute;n">
+        </div>
+    </form>
+</div> <!-- /container -->
