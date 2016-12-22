@@ -10,7 +10,6 @@ define(function ()
     var Request = 
     {
         requestObject: new XMLHttpRequest(), 
-        parameters: '',
         method: 'GET',
         path: '',
         callback: '',
@@ -18,24 +17,26 @@ define(function ()
         responseType: 'json',
         user: null,
         password: null,
+        _url: '',
+        _parameters: '',
 
         appendParameter(key, value)
         {
             key = (key) ? key : console.error('The key parameter can not be null!');
             value = (value) ? value : console.error('The value parameter can not be null!');
-            this.parameters += key + '=' + value + '&'; 
+            this._parameters += key + '=' + value + '&'; 
         },
 
         _generateUrl()
         {
-            this.parameters = this.parameters.slice(0, -1);
-            this.url = this.path + '?' + this.parameters;
+            this._parameters = this._parameters.slice(0, -1);
+            this._url = this.path + '?' + this._parameters;
         },
 
         send()
         {
             this._generateUrl();   
-            this.requestObject.open(this.method, this.url, this.asynchronous, this.user, this.password);
+            this.requestObject.open(this.method, this._url, this.asynchronous, this.user, this.password);
             this.requestObject.send();
             this.requestObject.responseType = this.responseType;
 
