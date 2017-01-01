@@ -13,8 +13,7 @@ class TestDatabase implements ActionInterface
     public function execute()
     {
         $dbh = ComponentFactory::create('DatabaseHandler');
-        $sql = 'select users.username from users';
-        echo json_encode( $dbh->exec($sql) );
+        echo json_encode( $dbh->exec('select users.username from users') );
     }
 }
 ?>
