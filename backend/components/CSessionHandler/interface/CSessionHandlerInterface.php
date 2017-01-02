@@ -5,6 +5,12 @@
 * Released under the MIT license
 * https://opensource.org/licenses/MIT
 **/
-    require_once 'application/Application.php';
-    Application::run();
+interface CSessionHandlerInterface
+{
+    public function start();
+    public function set($key, $value);
+    public function get($key);
+    public function delete($key);
+    public function destroy();
+}
 ?>

@@ -12,7 +12,7 @@ define('CT_DATABASE_TRANSACTION_ERROR', '¡Error on SQL Transaction! system mess
 
 /*DATABASE CONNECTION FOR SQLITE*/
 define('CT_DATABASE_ENGINE', 'sqlite');
-define('CT_DATABASE_FILE_PATH', 'components/DatabaseHandler/test/test.sqlite');
+define('CT_DATABASE_FILE_PATH', 'database/db.sqlite');
 define('CT_DATABASE_CHARSET', 'utf8');
 
 /*DATABASE CONNECTION FOR MYSQL*/

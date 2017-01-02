@@ -1,21 +1,19 @@
 <?php
 /**
-* Copyright (c) 2013 Gabriel Ferreira <gabrielinuz@gmail.com>. All rights reserved. 
+* Copyright (c) 2013-2016 Gabriel Ferreira <gabrielinuz@gmail.com>. All rights reserved. 
 * This file is part of COMPSET.
 * Released under the MIT license
 * https://opensource.org/licenses/MIT
 **/
 
-include_once 'components/Authenticator/interface/AuthenticatorInterface.php';
-include_once 'components/Authenticator/interface/SessionHandlerInterface.php';
-include_once 'components/Authenticator/interface/DatabaseHandlerInterface.php';
-include_once 'components/Authenticator/interface/EncryptManagerInterface.php';
+require_once 'components/Authenticator/interface/AuthenticatorInterface.php';
+// require_once 'components/Authenticator/interface/SessionHandlerInterface.php';
+// require_once 'components/Authenticator/interface/DatabaseHandlerInterface.php';
+// require_once 'components/Authenticator/interface/EncryptorInterface.php';
 
 class Authenticator implements AuthenticatorInterface
 {
-    public function __construct(){}
-
-    public function setSessionHandler(SessionHandlerInterface $sessionHandler)
+    public function setSessionHandler(CSessionHandlerInterface $sessionHandler)
     {
         $this->sessionHandler = $sessionHandler;
     }
@@ -40,21 +38,16 @@ class Authenticator implements AuthenticatorInterface
         $this->encryptor = $encryptor;
     }
 
-    public function getEncryptManager()
-    {
-        return $this->encryptor;
-    }
-
     public function authenticate($userName, $password)
     {
-        if( !$this->sessionHandler->get('authenticated') )
-        {
+        // if( !$this->sessionHandler->get('authenticated') )
+        // {
             //DATAHANDLER
-            $storedUser = $dbh->exec('select users.id,
-                                        users.userName,
+            $storedUser = $this->dbh->exec('select users.id,
+                                        users.username,
                                         users.password 
                                         from users 
-                                        where users.userName = $userName')[0];
+                                        where users.username = ?', $userName)[0];
 
             //PASSWORD VERIFY
             $isAuthenticate = $this->encryptor->verify($password, $storedUser['password']);
@@ -62,7 +55,7 @@ class Authenticator implements AuthenticatorInterface
             if( $isAuthenticate )
             {
                 //SET SESSION DATA
-                $this->sessionHandler->set('sessionUserName', $storedUser['userName']);
+                $this->sessionHandler->set('sessionUserName', $storedUser['username']);
                 $this->sessionHandler->set('sessionUserId', $storedUser['id']);
                 $this->sessionHandler->set("authenticated", true);
             }
@@ -70,7 +63,8 @@ class Authenticator implements AuthenticatorInterface
             {
                 $this->sessionHandler->set("authenticated", false);
             }  
-        }
+        // }
+        return $this->sessionHandler->get("authenticated");
     }
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 /**
-* Copyright (c) 2013 Gabriel Ferreira <gabrielinuz@gmail.com>. All rights reserved. 
+* Copyright (c) 2013-2016 Gabriel Ferreira <gabrielinuz@gmail.com>. All rights reserved. 
 * This file is part of COMPSET.
 * Released under the MIT license
 * https://opensource.org/licenses/MIT
@@ -12,7 +12,7 @@ final class Application
     public static function run()
     {
         /*TEST SESSION*/
-        $sessionHandler = ComponentFactory::create('SessionHandler');
+        $sessionHandler = ComponentFactory::create('CSessionHandler');
         $sessionHandler->start();
         /*TEST*/
 
@@ -26,7 +26,8 @@ final class Application
         $authenticator->setSessionHandler( $sessionHandler );
         $authenticator->setDBHandler( ComponentFactory::create('DatabaseHandler') );
         $authenticator->setEncryptor( ComponentFactory::create('Encryptor') );
-        $authenticator->authenticate($_REQUEST['user'], $_REQUEST['password']);
+        $authenticate = $authenticator->authenticate($_REQUEST['user'], $_REQUEST['password']);
+        if (!$authenticate) die('authorization error');
         /*TEST AUTHENTICATOR*/
 
         /*ACTION CONSTRUCT*/
@@ -40,7 +41,8 @@ final class Application
         /*TEST AUTHORIZER*/
         $authorizer = ComponentFactory::create('Authorizer');
         $authorizer->setAuthenticator( $authenticator );
-        $authorizer->authorize($actionObject);        
+        $authorize = $authorizer->authorize($actionObject);    
+        if (!$authorize) die('authorization error');
         /*TEST AUTHORIZER*/
         
         /*ACTION LOADER*/

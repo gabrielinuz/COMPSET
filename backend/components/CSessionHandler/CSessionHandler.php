@@ -6,22 +6,23 @@
 * https://opensource.org/licenses/MIT
 **/
 
-include_once 'components/SessionHandler/interface/SessionHandlerInterface.php';
+require_once 'components/CSessionHandler/interface/CSessionHandlerInterface.php';
 
-class SessionHandler implements SessionHandlerInterface
+class CSessionHandler implements CSessionHandlerInterface
 {
     public function __construct()
     {
-        include 'components/SoapClientWrapper/ConfigurationManager.php';
-        include 'components/SoapClientWrapper/configuration.php';
+        include 'components/CSessionHandler/ConfigurationManager.php';
+        include 'components/CSessionHandler/configuration.php';
         $this->cm = ConfigurationManager::instance();
         session_id( $this->cm->get('sessionId') );
     }
 
     public function start()
     {
-        $cl = $this->cm->get('cookieLifetime')
+        $cl = $this->cm->get('cookieLifetime');
         session_start(['cookie_lifetime' => $cl,]);
+        // session_start();
     }
 
     public function set($key, $value)
@@ -31,13 +32,13 @@ class SessionHandler implements SessionHandlerInterface
 
     public function get($key)
     {
-        if( !isset($_SESSION["$key"]) && empty($_SESSION["$key"]) ) $_SESSION["$key"]) = NULL;
+        if( !isset($_SESSION["$key"]) && empty($_SESSION["$key"]) ) $_SESSION["$key"] = NULL;
         return $_SESSION["$key"];
     }
 
     public function delete($key)
     {
-        if( isset($_SESSION["$key"]) && !empty($_SESSION["$key"]) ) $_SESSION["$key"]) = NULL;
+        if( isset($_SESSION["$key"]) && !empty($_SESSION["$key"]) ) $_SESSION["$key"] = NULL;
     }
 
     public function destroy()
