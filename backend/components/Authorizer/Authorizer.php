@@ -8,7 +8,7 @@
 
 require_once 'components/Authorizer/interface/AuthorizerInterface.php';
 // require_once 'components/Authorizer/interface/AuthenticatorInterface.php';
-// require_once 'components/Authorizer/interface/SessionHandlerInterface.php';
+// require_once 'components/Authorizer/interface/CSessionHandlerInterface.php';
 // require_once 'components/Authorizer/interface/DatabaseHandlerInterface.php';
 // require_once 'components/Authorizer/interface/ActionInterface.php';
 

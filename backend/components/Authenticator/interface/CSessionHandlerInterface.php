@@ -5,7 +5,7 @@
 * Released under the MIT license
 * https://opensource.org/licenses/MIT
 **/
-interface SessionHandlerInterface
+interface CSessionHandlerInterface
 {
     public function start();
     public function set($key, $value);
