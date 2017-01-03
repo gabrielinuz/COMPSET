@@ -6,10 +6,6 @@
 * https://opensource.org/licenses/MIT
 **/
 
-// require_once 'components/Authenticator/interface/CSessionHandlerInterface.php';
-// require_once 'components/Authenticator/interface/DatabaseHandlerInterface.php';
-// require_once 'components/Authenticator/interface/EncryptorInterface.php';
-
 interface AuthenticatorInterface
 {
     public function setSessionHandler(CSessionHandlerInterface $sessionHandler);

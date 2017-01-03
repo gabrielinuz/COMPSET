@@ -7,9 +7,6 @@
 **/
 
 require_once 'components/Authenticator/interface/AuthenticatorInterface.php';
-// require_once 'components/Authenticator/interface/CSessionHandlerInterface.php';
-// require_once 'components/Authenticator/interface/DatabaseHandlerInterface.php';
-// require_once 'components/Authenticator/interface/EncryptorInterface.php';
 
 class Authenticator implements AuthenticatorInterface
 {
