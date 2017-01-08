@@ -10,8 +10,6 @@ define(['libraries/Request/Request', 'modules/test/TestDatabaseView'],
     {
         function run() 
         {
-            // Request.user = 'guest';
-            // Request.password = '12345';
             Request.path = 'backend/main.php';
             Request.callback = TestDatabaseView;
             Request.appendParameter('action', 'test/TestDatabase');

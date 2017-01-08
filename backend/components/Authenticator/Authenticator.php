@@ -10,14 +10,9 @@ require_once 'components/Authenticator/interface/AuthenticatorInterface.php';
 
 class Authenticator implements AuthenticatorInterface
 {
-    public function setSessionHandler(CSessionHandlerInterface $sessionHandler)
+    public function __construct()
     {
-        $this->sessionHandler = $sessionHandler;
-    }
-
-    public function getSessionHandler()
-    {
-        return $this->sessionHandler;
+        $this->authenticated = false;
     }
 
     public function setDBHandler(DatabaseHandlerInterface $dbh)
@@ -35,33 +30,29 @@ class Authenticator implements AuthenticatorInterface
         $this->encryptor = $encryptor;
     }
 
+    private function setUserId($userId)
+    {
+        $this->userId = $userId;
+    }
+
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
     public function authenticate($userName, $password)
     {
-        // if( !$this->sessionHandler->get('authenticated') )
-        // {
-            //DATAHANDLER
-            $storedUser = $this->dbh->exec('select users.id,
+        $storedUser = $this->dbh->exec('select users.id,
                                         users.username,
                                         users.password 
                                         from users 
                                         where users.username = ?', $userName)[0];
 
-            //PASSWORD VERIFY
-            $isAuthenticate = $this->encryptor->verify($password, $storedUser['password']);
+        if (!empty($storedUser['id'])) $this->setUserId($storedUser['id']);
+        $isAuthenticated = $this->encryptor->verify($password, $storedUser['password']);       
+        if( $isAuthenticated ) $this->authenticated = true;
 
-            if( $isAuthenticate )
-            {
-                //SET SESSION DATA
-                $this->sessionHandler->set('sessionUserName', $storedUser['username']);
-                $this->sessionHandler->set('sessionUserId', $storedUser['id']);
-                $this->sessionHandler->set("authenticated", true);
-            }
-            else
-            {
-                $this->sessionHandler->set("authenticated", false);
-            }  
-        // }
-        return $this->sessionHandler->get("authenticated");
+        return $this->authenticated;
     }
 }
 ?>

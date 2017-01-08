@@ -11,11 +11,6 @@ final class Application
 {
     public static function run()
     {
-    /*TEST SESSION*/
-        $sessionHandler = ComponentFactory::create('CSessionHandler');
-        $sessionHandler->start();
-    /*TEST SESSION*/
-
     /*SANITIZER*/
         $inputSanitizer = ComponentFactory::create('TextInputSanitizer');
         if (isset($_REQUEST)) $_REQUEST = $inputSanitizer->sanitize($_REQUEST); 
@@ -23,11 +18,10 @@ final class Application
 
     /*TEST AUTHENTICATOR*/
         $authenticator = ComponentFactory::create('Authenticator');
-        $authenticator->setSessionHandler( $sessionHandler );
         $authenticator->setDBHandler( ComponentFactory::create('DatabaseHandler') );
         $authenticator->setEncryptor( ComponentFactory::create('Encryptor') );
-        $authenticate = $authenticator->authenticate($_REQUEST['user'], $_REQUEST['password']);
-        if (!$authenticate) die('authorization error');
+        $authenticated = $authenticator->authenticate($_REQUEST['user'], $_REQUEST['password']);
+        if (!$authenticated) die('authentication error');
     /*TEST AUTHENTICATOR*/
 
     /*ACTION CONSTRUCT*/
@@ -40,9 +34,9 @@ final class Application
 
     /*TEST AUTHORIZER*/
         $authorizer = ComponentFactory::create('Authorizer');
-        $authorizer->setAuthenticator( $authenticator );
-        $authorize = $authorizer->authorize($actionObject);    
-        if (!$authorize) die('authorization error');
+        $authorizer->setAuthenticator($authenticator);
+        $authorized = $authorizer->authorize($actionObject);    
+        if (!$authorized) die('authorization error');
     /*TEST AUTHORIZER*/
         
     /*ACTION LOADER*/

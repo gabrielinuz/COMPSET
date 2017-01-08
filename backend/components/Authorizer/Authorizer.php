@@ -10,35 +10,21 @@ require_once 'components/Authorizer/interface/AuthorizerInterface.php';
 
 class Authorizer implements AuthorizerInterface
 {
-    private $authenticator;
-    private $sessionHandler;
-    private $dbh;
-
     public function __construct()
     {
         $this->adminRoleId = 1;
+        $this->authorized = false;
     }
 
     public function setAuthenticator(AuthenticatorInterface $authenticator)
     {
         $this->authenticator = $authenticator;
-        $this->setSessionHandler($this->authenticator->getSessionHandler());
         $this->setDBHandler($this->authenticator->getDBHandler());
     }
 
     public function getAuthenticator()
     {
         return $this->authenticator;
-    }
-
-    public function setSessionHandler(CSessionHandlerInterface $sessionHandler)
-    {
-        $this->sessionHandler = $sessionHandler;
-    }
-
-    public function getSessionHandler()
-    {
-        return $this->sessionHandler;
     }
 
     public function setDBHandler(DatabaseHandlerInterface $dbh)
@@ -77,7 +63,7 @@ class Authorizer implements AuthorizerInterface
 
     private function isAdmin()
     {
-        $userId = $this->sessionHandler->get('sessionUserId'); 
+        $userId = $this->authenticator->getUserId(); 
         $adminRoleId = $this->adminRoleId; 
 
         $isAdmin = $this->dbh->exec('select roles.* 
@@ -92,7 +78,7 @@ class Authorizer implements AuthorizerInterface
 
     private function isAllowed()
     {
-        $userId = $this->sessionHandler->get('sessionUserId'); 
+        $userId = $this->authenticator->getUserId(); 
         $actionId = $this->getActionId(); 
 
         $isAllowed = $this->dbh->exec('select roles.* 
@@ -113,19 +99,9 @@ class Authorizer implements AuthorizerInterface
     public function authorize(ActionInterface $action)
     {
         $this->setAction( $action );
-        // if( $this->sessionHandler->get('authenticated') and !$this->sessionHandler->get('authorized'))
-        // {
-            $isAllowedRole = ( $this->isAdmin() || $this->isAllowed() );
-            if( $isAllowedRole )
-            {
-                $this->sessionHandler->set("authorized", true);
-            }
-            else
-            {
-                $this->sessionHandler->set("authorized", false);
-            } 
-        // }
-        return $this->sessionHandler->get("authorized");
+        $isAllowedRole = ( $this->isAdmin() || $this->isAllowed() );
+        if( $isAllowedRole ) $this->authorized = true;
+        return $this->authorized;
     }
 }
 ?>

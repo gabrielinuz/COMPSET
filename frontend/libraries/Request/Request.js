@@ -15,8 +15,6 @@ define(function ()
         callback: '',
         asynchronous: true,
         responseType: 'json',
-        user: null,
-        password: null,
         _url: '',
         _parameters: '',
 
@@ -36,7 +34,7 @@ define(function ()
         send()
         {
             this._generateUrl();   
-            this.requestObject.open(this.method, this._url, this.asynchronous, this.user, this.password);
+            this.requestObject.open(this.method, this._url, this.asynchronous);
             this.requestObject.send();
             this.requestObject.responseType = this.responseType;
 
