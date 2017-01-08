@@ -48,9 +48,9 @@ class Authenticator implements AuthenticatorInterface
                                         from users 
                                         where users.username = ?', $userName)[0];
 
-        if (!empty($storedUser['id'])) $this->setUserId($storedUser['id']);
+        if ( !empty($storedUser['id']) ) $this->setUserId($storedUser['id']);
         $isAuthenticated = $this->encryptor->verify($password, $storedUser['password']);       
-        if( $isAuthenticated ) $this->authenticated = true;
+        if($isAuthenticated) $this->authenticated = true;
 
         return $this->authenticated;
     }

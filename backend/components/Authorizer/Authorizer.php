@@ -91,16 +91,16 @@ class Authorizer implements AuthorizerInterface
 
                                         where users_has_roles.users_id = ?
                                         and roles_has_actions.actions_id = ?',
-                                        array($userId, $actionId));
+                                        array($userId, $actionId) );
 
         return ( $isAllowed != array() );
     }
 
     public function authorize(ActionInterface $action)
     {
-        $this->setAction( $action );
-        $isAllowedRole = ( $this->isAdmin() || $this->isAllowed() );
-        if( $isAllowedRole ) $this->authorized = true;
+        $this->setAction($action);
+        $isAuthorized = ( $this->isAdmin() || $this->isAllowed() );
+        if($isAuthorized) $this->authorized = true;
         return $this->authorized;
     }
 }
