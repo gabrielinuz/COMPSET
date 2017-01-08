@@ -11,44 +11,44 @@ final class Application
 {
     public static function run()
     {
-        /*TEST SESSION*/
+    /*TEST SESSION*/
         $sessionHandler = ComponentFactory::create('CSessionHandler');
         $sessionHandler->start();
-        /*TEST*/
+    /*TEST SESSION*/
 
-        /*SANITIZER*/
+    /*SANITIZER*/
         $inputSanitizer = ComponentFactory::create('TextInputSanitizer');
         if (isset($_REQUEST)) $_REQUEST = $inputSanitizer->sanitize($_REQUEST); 
-        /*SANITIZER*/
+    /*SANITIZER*/
 
-        /*TEST AUTHENTICATOR*/
+    /*TEST AUTHENTICATOR*/
         $authenticator = ComponentFactory::create('Authenticator');
         $authenticator->setSessionHandler( $sessionHandler );
         $authenticator->setDBHandler( ComponentFactory::create('DatabaseHandler') );
         $authenticator->setEncryptor( ComponentFactory::create('Encryptor') );
         $authenticate = $authenticator->authenticate($_REQUEST['user'], $_REQUEST['password']);
         if (!$authenticate) die('authorization error');
-        /*TEST AUTHENTICATOR*/
+    /*TEST AUTHENTICATOR*/
 
-        /*ACTION CONSTRUCT*/
+    /*ACTION CONSTRUCT*/
         $actionData = explode('/', $_REQUEST['action']);
         $actionModule = $actionData[0]; 
         $actionClass = $actionData[1];
         require_once('application/modules/'.$actionModule.'/'.$actionClass.'.php');
         $actionObject = new $actionClass;
-        /*ACTION CONSTRUCT*/
+    /*ACTION CONSTRUCT*/
 
-        /*TEST AUTHORIZER*/
+    /*TEST AUTHORIZER*/
         $authorizer = ComponentFactory::create('Authorizer');
         $authorizer->setAuthenticator( $authenticator );
         $authorize = $authorizer->authorize($actionObject);    
         if (!$authorize) die('authorization error');
-        /*TEST AUTHORIZER*/
+    /*TEST AUTHORIZER*/
         
-        /*ACTION LOADER*/
+    /*ACTION LOADER*/
         $actionLoader = ComponentFactory::create('ActionLoader');
         $actionLoader->load($actionObject);
-        /*ACTION LOADER*/
+    /*ACTION LOADER*/
     }
 }
 ?>
