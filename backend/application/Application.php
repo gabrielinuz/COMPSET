@@ -39,6 +39,12 @@ final class Application
         if (!$authorized) die('authorization error');
     /*TEST AUTHORIZER*/
         
+    /*TEST ACCOUNTER*/
+        // $accounter = ComponentFactory::create('Accounter');
+        // $accounter->setAuthorizer($authorizer);
+        // $accounter->account();
+    /*TEST ACCOUNTER*/
+
     /*ACTION LOADER*/
         $actionLoader = ComponentFactory::create('ActionLoader');
         $actionLoader->load($actionObject);
