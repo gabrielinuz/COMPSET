@@ -6,13 +6,13 @@
 * https://opensource.org/licenses/MIT
 **/
 
+
 interface AuthenticatorInterface
 {
-    public function setSessionHandler(CSessionHandlerInterface $sessionHandler);
-    public function getSessionHandler();
-    public function setDBHandler(DatabaseHandlerInterface $dbh);
-    public function getDBHandler();
+    public function setDatabaseHandler(DatabaseHandlerInterface $dbh);
+    public function getDatabaseHandler();
     public function setEncryptor(EncryptorInterface $encryptor);
+    public function getUserId();
     public function authenticate($userName, $password);
 }
 ?>

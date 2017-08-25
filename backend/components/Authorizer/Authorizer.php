@@ -19,7 +19,7 @@ class Authorizer implements AuthorizerInterface
     public function setAuthenticator(AuthenticatorInterface $authenticator)
     {
         $this->authenticator = $authenticator;
-        $this->setDBHandler($this->authenticator->getDBHandler());
+        $this->setDatabaseHandler($this->authenticator->getDatabaseHandler());
     }
 
     public function getAuthenticator()
@@ -27,12 +27,12 @@ class Authorizer implements AuthorizerInterface
         return $this->authenticator;
     }
 
-    public function setDBHandler(DatabaseHandlerInterface $dbh)
+    public function setDatabaseHandler(DatabaseHandlerInterface $dbh)
     {
         $this->dbh = $dbh;
     }
 
-    public function getDBHandler()
+    public function getDatabaseHandler()
     {
         return $this->dbh;
     }

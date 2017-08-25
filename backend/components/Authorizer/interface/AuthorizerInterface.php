@@ -10,8 +10,8 @@ interface AuthorizerInterface
 {
     public function setAuthenticator(AuthenticatorInterface $authenticator);
     public function getAuthenticator();
-    public function setDBHandler(DatabaseHandlerInterface $dbh);
-    public function getDBHandler();
+    public function setDatabaseHandler(DatabaseHandlerInterface $dbh);
+    public function getDatabaseHandler();
     public function setAdminRoleId($adminRoleId);
     public function getAdminRoleId();
     public function authorize(ActionInterface $action);

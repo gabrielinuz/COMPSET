@@ -9,7 +9,7 @@ define( function ()
     {
         function run() 
         {
-            alert('HELLO WOLRD');
+            alert(traductor.hello);
         }
 
         return { run:run };

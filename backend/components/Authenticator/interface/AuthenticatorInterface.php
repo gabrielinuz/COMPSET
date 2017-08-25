@@ -9,8 +9,8 @@
 
 interface AuthenticatorInterface
 {
-    public function setDBHandler(DatabaseHandlerInterface $dbh);
-    public function getDBHandler();
+    public function setDatabaseHandler(DatabaseHandlerInterface $dbh);
+    public function getDatabaseHandler();
     public function setEncryptor(EncryptorInterface $encryptor);
     public function getUserId();
     public function authenticate($userName, $password);

@@ -15,12 +15,12 @@ class Authenticator implements AuthenticatorInterface
         $this->authenticated = false;
     }
 
-    public function setDBHandler(DatabaseHandlerInterface $dbh)
+    public function setDatabaseHandler(DatabaseHandlerInterface $dbh)
     {
         $this->dbh = $dbh;
     }
 
-    public function getDBHandler()
+    public function getDatabaseHandler()
     {
         return $this->dbh;
     }

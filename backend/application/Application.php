@@ -13,19 +13,19 @@ final class Application
     {
     /*SANITIZER*/
         $inputSanitizer = ComponentFactory::create('TextInputSanitizer');
-        if (isset($_REQUEST)) $_REQUEST = $inputSanitizer->sanitize($_REQUEST); 
+        if (isset($_POST)) $_POST = $inputSanitizer->sanitize($_POST); 
     /*SANITIZER*/
 
     /*TEST AUTHENTICATOR*/
         $authenticator = ComponentFactory::create('Authenticator');
-        $authenticator->setDBHandler( ComponentFactory::create('DatabaseHandler') );
+        $authenticator->setDatabaseHandler( ComponentFactory::create('DatabaseHandler') );
         $authenticator->setEncryptor( ComponentFactory::create('Encryptor') );
-        $authenticated = $authenticator->authenticate($_REQUEST['user'], $_REQUEST['password']);
+        $authenticated = $authenticator->authenticate($_POST['user'], $_POST['password']);
         if (!$authenticated) die('authentication error');
     /*TEST AUTHENTICATOR*/
 
     /*ACTION CONSTRUCT*/
-        $actionData = explode('/', $_REQUEST['action']);
+        $actionData = explode('/', $_POST['action']);
         $actionModule = $actionData[0]; 
         $actionClass = $actionData[1];
         require_once('application/modules/'.$actionModule.'/'.$actionClass.'.php');
