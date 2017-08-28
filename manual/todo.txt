@@ -1,0 +1,10 @@
+validator module:  the messages file will be divided into many files with the cases: es, en , br, etc
+
+exception handler or/and error handler?
+
+exception handler to database logs (see error_log function)
+
+error handler to frontend client
+
+keep out "if (!$authorized) die('authorization error');" from Application class, use the ResponseHandler into used components.
+
