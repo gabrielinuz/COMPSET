@@ -8,7 +8,7 @@
 
 require_once 'components/ActionLoader/interface/ActionInterface.php';
 
-class TestDatabase implements ActionInterface
+class TestAction implements ActionInterface
 {
     public function execute()
     {
