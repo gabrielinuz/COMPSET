@@ -7,12 +7,13 @@
 **/
 include_once 'components/Responder/interface/ResponderInterface.php';
 
-class ResponderSelector implements ResponderInterface
+class Responder implements ResponderInterface
 {
 	private $responder;
 
 	public function __construct()
 	{
+		$responseType = $_POST['responseType'];
 		switch ($responseType) 
 		{
 			case 'json':
