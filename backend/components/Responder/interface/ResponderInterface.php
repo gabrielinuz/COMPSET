@@ -8,6 +8,7 @@
 
 interface ResponderInterface
 {
-    public function response( $content );
+	public function setHttpState($state);
+    public function response($content);
 }
 ?>
