@@ -34,9 +34,9 @@ define(function ()
 
         button.addEventListener('click', function()
         {        
-            require(['modules/test/TestActionController'], function(TestActionController) 
+            require(['modules/test/HelloController'], function(HelloController) 
             {
-                TestActionController.run();
+                HelloController.run();
             });
         });
     };

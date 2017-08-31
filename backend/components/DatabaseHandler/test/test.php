@@ -38,4 +38,10 @@ $parameters = array('1', 'admin');
 echo '<h2>SELECT USERS BY NAME AND ID: </h2>';
 echo json_encode( $dbh->exec($sql, $parameters) );
 echo '<br>';
+
+$sql = 'call getUsersById @id = ?';
+$parameters = 1;
+echo '<h2>SELECT USERS BY ID: </h2>';
+echo json_encode( $dbh->exec($sql, $parameters) );
+echo '<br>';
 ?>

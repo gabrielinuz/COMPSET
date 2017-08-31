@@ -7,7 +7,7 @@
 
 define(function (require) 
 {
-    var test = require('modules/test/TestDatabaseController');
+    var test = require('modules/test/TestController');
     test.run();
 
     /*@ToDo*/
