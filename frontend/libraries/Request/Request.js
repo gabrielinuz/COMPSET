@@ -10,7 +10,7 @@ define(function ()
     var Request = 
     {
         requestObject: new XMLHttpRequest(), 
-        method: 'GET',
+        method: 'POST',
         path: '',
         callback: '',
         asynchronous: true,

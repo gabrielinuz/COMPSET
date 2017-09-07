@@ -10,20 +10,25 @@ include_once 'components/Responder/interface/ResponderInterface.php';
 class Responder implements ResponderInterface
 {
 	private $responder;
+	private $responseType = 'json';
 
 	public function __construct()
 	{
-		$responseType = $_POST['responseType'];
-		switch ($responseType) 
+		switch ($this->responseType) 
 		{
-			case 'json':
-				$this->responder = ComponentFactory::create('JsonResponder')
+			case 'xml':
+				$this->responder = ComponentFactory::create('XmlResponder');		
 				break;
 			
-			default:
-				$this->responder = ComponentFactory::create('XmlResponder')
+			case 'json':
+				$this->responder = ComponentFactory::create('JsonResponder');
 				break;
 		}
+	}
+
+	public function setResponseType($responseType)
+	{
+		$this->responseType = $responseType;
 	}
 
 	public function setHttpState($state)

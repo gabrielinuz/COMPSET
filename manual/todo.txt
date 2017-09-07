@@ -8,3 +8,5 @@ error handler to frontend client
 
 keep out "if (!$authorized) die('authorization error');" from Application class, use the ResponseHandler into used components.
 
+json_decode and xml_decode for input data
+
