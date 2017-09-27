@@ -1,3 +1,4 @@
+Backend:
 validator module:  the messages file will be divided into many files with the cases: es, en , br, etc
 
 exception handler or/and error handler?
@@ -10,3 +11,4 @@ keep out "if (!$authorized) die('authorization error');" from Application class,
 
 json_decode and xml_decode for input data
 
+Frontend:

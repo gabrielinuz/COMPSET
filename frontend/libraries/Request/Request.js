@@ -33,9 +33,34 @@ define(function ()
 
         send()
         {
-            this._generateUrl();   
-            this.requestObject.open(this.method, this._url, this.asynchronous);
-            this.requestObject.send();
+            //switch(String(this.method))
+            switch(String(this.method))
+            {
+                case 'POST':
+                case 'post':
+                    this._generateUrl();   
+                    this.requestObject.open(this.method, this._path, this.asynchronous);
+                    this.requestObject.send(this._parameters);
+                break;
+                default:
+                    this._generateUrl();   
+                    this.requestObject.open(this.method, this._url, this.asynchronous);
+                    this.requestObject.send();
+            }
+            // if(this.method = 'GET')
+            // {
+            //     this._generateUrl();   
+            //     this.requestObject.open(this.method, this._url, this.asynchronous);
+            //     this.requestObject.send();
+            // } 
+
+            // if(this.method = 'POST')
+            // {
+            //     this._generateUrl();   
+            //     this.requestObject.open(this.method, this._path, this.asynchronous);
+            //     this.requestObject.send(this._parameters);
+            // } 
+
             this.requestObject.responseType = this.responseType;
 
             var self = this;
