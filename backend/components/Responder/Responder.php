@@ -17,10 +17,12 @@ class Responder implements ResponderInterface
 		switch ($this->responseType) 
 		{
 			case 'xml':
+			case 'XML':
 				$this->responder = ComponentFactory::create('XmlResponder');		
 				break;
 			
 			case 'json':
+			case 'JSON':
 				$this->responder = ComponentFactory::create('JsonResponder');
 				break;
 		}
