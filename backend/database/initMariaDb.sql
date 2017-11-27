@@ -17,9 +17,9 @@ CREATE TABLE `users` (
   `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
   `identification` varchar(255) COLLATE utf8_unicode_ci NOT NULL,/*nickname or email or etc*/
   `passwordHash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `createdAt` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, /*automatic (on create)*/
   `createdBy` bigint(20) unsigned NOT NULL DEFAULT '1',
-  `updatedAt` datetime NOT NULL, /*automatic (on update)*/
+  `updatedAt` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP, /*automatic (on update)*/
   `updatedBy` bigint(20) unsigned NOT NULL DEFAULT '1',
   `isDelete` bit(1) NOT NULL DEFAULT b'0',
   `isHidden` bit(1) NOT NULL DEFAULT b'0',
@@ -35,9 +35,9 @@ CREATE TABLE `groups` (
   `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `createdAt` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, /*automatic (on create)*/
   `createdBy` bigint(20) unsigned NOT NULL DEFAULT '1',
-  `updateAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP, /*automatic (on update)*/
   `updatedBy` bigint(20) unsigned NOT NULL DEFAULT '1',
   `isDelete` bit(1) NOT NULL DEFAULT b'0',
   `isHidden` bit(1) NOT NULL DEFAULT b'0',
@@ -53,9 +53,9 @@ CREATE TABLE `roles` (
   `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `createdAt` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, /*automatic (on create)*/
   `createdBy` bigint(20) unsigned NOT NULL DEFAULT '1',
-  `updateAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP, /*automatic (on update)*/
   `updatedBy` bigint(20) unsigned NOT NULL DEFAULT '1',
   `isDelete` bit(1) NOT NULL DEFAULT b'0',
   `isHidden` bit(1) NOT NULL DEFAULT b'0',
@@ -70,9 +70,9 @@ CREATE TABLE `actions` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `uuid` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `createdAt` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, /*automatic (on create)*/
   `createdBy` bigint(20) unsigned NOT NULL DEFAULT '1',
-  `updateAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP, /*automatic (on update)*/
   `updatedBy` bigint(20) unsigned NOT NULL DEFAULT '1',
   `isDelete` bit(1) NOT NULL DEFAULT b'0',
   `isHidden` bit(1) NOT NULL DEFAULT b'0',
