@@ -10,10 +10,8 @@ require_once 'components/ComponentFactory/ComponentFactory.php';
 require_once 'components/RestApiClient/RestApiClient.php';
 
 $client = ComponentFactory::create('RestApiClient');
-
 $client->setUrl('https://jsonplaceholder.typicode.com/posts/1');
 $client->setMethod('get');
-
 $result = $client->sendRequest();
 
 var_dump($result);
